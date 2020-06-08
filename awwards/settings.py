@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'awards',
+    'bootstrap3',
+    'bootstrap4',
+    'tinymce',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
