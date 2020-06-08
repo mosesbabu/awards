@@ -1,0 +1,47 @@
+.navbar{
+  height:70px;
+  background-color: #f4f7f6;
+  margin-bottom: 0px;
+}
+
+.fas{
+  margin-top: 8px;
+  font-size: 24px;
+}
+.navbar-form{
+  margin-top:20px;
+}
+.form-control{
+  margin-left: 20%;
+}
+input{
+  width:50px;
+  height:2px;
+  color:#999;
+  font-weight:
+}
+.navbar-brand{
+  display: flex;
+  justify-content: center;
+}
+.navbar-brand img{
+  margin-left: 70px;
+  float: none;
+}
+.instagramlogo{
+  margin-top:1px;
+}
+
+.aw-logo{
+  margin: auto;
+}
+body{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+.container-fluid{
+}
+/* .btn{
+  border-radius: 0;
+} */
