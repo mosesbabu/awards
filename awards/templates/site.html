@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% load staticfiles %}
+
+{% block styles%}
+{% bootstrap_css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+{%endblock %}
+
+{% block content %}
+
+    <div class="carousel-inner">
+      <!-- <div class="landingpage" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({% static 'img/cocaine.png'%}) fixed;"> -->
+      <div class="landingpage" >
+        <img src="{{project.landing_page.url}}" class="landingpage-img">
+        <div class="time">
+          <p><span class="bold">Site of the day </span>    {{date}}</p>
+        </div>
+
+        <div class="header">
+          <h1>{{project.title}}</h1>
+        </div>
+        <div class="page-body">
+          <p>BY <span style="color:#49c5b6;text-transform:uppercase;">{{project.username}}</span> FROM <span class="bold">{{project.country}}</span> WITH 0.75</p>
+        </div>
+
+          <div class="middle">
+
+            <div class="circle" id="circle-a">
+            	<strong></strong>
+              <p class="rating">DESIGN</p>
+            </div>
+            <div class="circle" id="circle-b">
+            	<strong></strong>
+              <p class="rating">USABILITY</p>
+            </div>
+            <div class="circle" id="circle-c">
+            	<strong></strong>
+              <p class="rating">CREATIVITY</p>
+            </div>
+            <div class="circle" id="circle-d">
+            	<strong></strong>
+              <p class="rating">CONTENT</p>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+
+<div class="text-center">
+  <h2>{{project.description | safe}}</h2>
+  <!-- <p>{{project.technologies.all}}</p> -->
+<div class="horizontal">
+{% for technology in project.technologies.all %}
+  <button class="btn btn-primary inline">{{ technology }}</button>
+{% endfor%}
+</div>
+
+<div class="spacing"></div>
+
+
+<div class="horizontal">
+{% for category in project.categories.all %}
+<button class="btn btn-danger inline">{{ category }}</button>
+{% endfor%}
+</div>
+
+<hr>
+
+<h3 class="bold">Screenshots</h3>
+
+<div class="screenshots">
+  <img class="screenshot-img img-responsive" src="{{project.screenshot1.url}}" alt="Card image cap" responsive>
+  <img class="screenshot-img img-responsive" src="{{project.screenshot2.url}}" alt="Card image cap" responsive>
+  <img class="screenshot-img img-responsive" src="{{project.screenshot3.url}}" alt="Card image cap" responsive>
+  <img class="screenshot-img img-responsive" src="{{project.screenshot4.url}}" alt="Card image cap" responsive>
+</div>
+
+
+</div>
+
+{% if ratings %}
+<h3 class="text-center">Votes</h3>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Design</th>
+      <th scope="col">Usability</th>
+
+      <th scope="col">Creativity</th>
+      <th scope="col">Content</th>
+      <th scope="col">Overall Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rating in ratings%}
+    <tr>
+      <td>{{rating.profile.username}}</td>
+      <td>{{rating.design}}</td>
+      <td>{{rating.usability}}</td>
+      <td>{{rating.creativity}}</td>
+      <td>{{rating.content}}</td>
+      <td>{{rating.overall_score}}</td>
+    </tr>
+
+{% endfor%}
+</tbody>
+</table>
+{%else %}
+<h3 class="text-center">No votes made for this site yet</h3>
+<hr>
+{% endif %}
+
+
+<form  action="/site/{{project.id}}" method="post" enctype="multipart/form-data" id="votes-form">
+  {%csrf_token%}
+
+  {% bootstrap_form form%}
+  <div class="text-center">
+  <input id="votes-input"type="submit" class="btn btn-success btn-lg" value="Post">
+</div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.1.3/circle-progress.min.js"></script>
+
+<script>
+
+var progressBarOptions = {
+	startAngle: -1.55,
+	size: 100,
+    value: {{project.design}},
+    fill: {
+		color: 'Chocolate'
+	}
+}
+
+$('.circle').circleProgress(progressBarOptions).on('circle-animation-progress', function(event, progress, stepValue) {
+	$(this).find('strong').text(String((stepValue/10).toFixed(2)));
+});
+
+$('#circle-b').circleProgress({
+	value :  {{project.usability}},
+	fill: {
+		color: 'Khaki'
+	}
+});
+
+$('#circle-c').circleProgress({
+	value :{{project.creativity}},
+	fill: {
+		color: 'DarkTurquoise'
+	}
+});
+$('#circle-d').circleProgress({
+	value : {{project.content}},
+	fill: {
+		color: 'SteelBlue'
+	}
+});
+
+
+</script>
+
+{% endblock %}

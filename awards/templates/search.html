@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% load staticfiles %}
+
+{% block styles%}
+{% bootstrap_css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{%endblock %}
+
+{% block content %}
+<div class="row text-center">
+  {% if projects %}
+  <h2> Found {{projects|length}} projects with the search term "{{message}}"</h2>
+  {% else %}
+  <h2> Found 0 projects for the search term "{{message}}"</h2>
+  {% endif %}
+</div>
+
+
+{% if projects %}
+<div class="text-center">
+
+<hr>
+<div class="container headers">
+</div>
+<div class="pages">
+<div class="row">
+  {% for project in projects %}
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="card" style="width: 40.2rem;">
+  <img class="card-img-top img-responsive" src="{{project.landing_page.url}}" alt="Card image cap" responsive>
+  <div class="card-body">
+    <a href="/site/{{project.id}}" style="color:black;text-decoration:none;">
+      <h5 class="card-title" style="line-height:28px;">{{project.title}}</h5>
+    </a>
+    <p class="card-text">From {{project.country}}<span class="date">{{project.post_date}}</span></p>
+  </div>
+</div>
+  </div>
+  {% endfor %}
+
+</div>
+  {%endif %}
+
+</div>
+</div>
+
+
+{% endblock %}

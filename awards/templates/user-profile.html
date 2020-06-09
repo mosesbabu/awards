@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% load staticfiles %}
+
+{% block styles%}
+{% bootstrap_css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{%endblock %}
+
+{% block content %}
+
+<div class="text-center">
+<div class="profile-image">
+  <img src="{{profile.avatar.url}}" class="gallery-image" alt=""  width=30 height=30>
+</div>
+<p style="font-size: 22px; font-weight:bold;margin:auto; padding:2px;">{{profile.username}}</p>
+<p class="card-text" style="font-size:16px;font-weight:bold;">{{profile.description |safe}}</p>
+<p class="card-text" style="font-size:14px;color:maroon;font-weight:bold;">{{profile.email}}</p>
+
+</div>
+
+<hr>
+
+<div class="container headers">
+    <h4 style="float:left;"><span class="bold" >Projects</span>  Your projects</h4>
+    <!-- <h4 style="float:right"><span><span class="bold">Mobile Excellence</span>  Recognized by Google</span></h4> -->
+</div>
+<div class="pages">
+<div class="row">
+
+  {% for project in projects %}
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="card" style="width: 40.2rem;">
+  <img class="card-img-top img-responsive" src="{{project.landing_page.url}}" alt="Card image cap" responsive>
+  <div class="card-body">
+    <a href="/site/{{project.id}}" style="color:black;text-decoration:none;">
+      <h5 class="card-title" style="line-height:28px;">{{project.title}}</h5>
+    </a>
+    <p class="card-text">From {{project.country}}<span class="date">{{project.post_date}}</span></p>
+  </div>
+</div>
+  </div>
+  {% endfor %}
+
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="card" style="width: 40.2rem;">
+  <img class="card-img-top img-responsive" src="{% static 'img/cocaine.png'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="line-height:28px;">Cocaine Route - Heart of Drugs</h5>
+    <p class="card-text">From Mexico <span class="date">November 10,2018</span></p>
+  </div>
+
+</div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="card" style="width: 40.2rem;">
+  <img class="card-img-top img-responsive" src="{% static 'img/test3.jpeg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="line-height:28px;">Lessons in Life</h5>
+    <p class="card-text">From Kenya <span class="date">October 6,2018</span></p>
+  </div>
+
+
+</div>
+  </div>
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <div class="card" style="width: 40.2rem;">
+  <img class="card-img-top img-responsive" src="{% static 'img/test2.jpeg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title" style="line-height:28px;">Whispers</h5>
+    <p class="card-text">From Paris <span class="date">September 26,2018</span></p>
+  </div>
+
+</div>
+  </div>
+
+
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.1.3/circle-progress.min.js"></script>
+
+{% endblock %}
