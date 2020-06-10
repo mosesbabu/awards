@@ -7,7 +7,7 @@ By: Moses Babu
 This web-app allows a user to create a Profile,Category,Country,Technology,Color and Projects that are all under his username allowing other users to vote for them and visit the particular projects site.
 
 ## Setup/Installation Requirements
-* Live site can be accessed from the following link https://awwards-clone.herokuapp.com/
+* Live site can be accessed from the following link https://awwwards-clone.herokuapp.com/
 
 
 ### Known Bugs
