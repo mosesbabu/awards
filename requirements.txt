@@ -14,7 +14,7 @@ django-crispy-forms==1.9.1
 django-friendship==1.9.1
 django-heroku==0.3.1
 django-registration==2.4.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 gunicorn==20.0.4
 Pillow==7.1.2
 psycopg2==2.8.5
